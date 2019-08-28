@@ -6,4 +6,11 @@ public class Aluno {
     private String sobrenome;
     private Integer codigoAluno;
 
+    public Aluno(String nome, String sobrenome, Integer codigoAluno) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.codigoAluno = codigoAluno;
+    }
+
+
 }
