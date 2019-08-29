@@ -14,6 +14,14 @@ public class Matricula {
 
     }
 
+    @Override
+    public String toString() {
+        return "Matricula{" +
+                "aluno=" + aluno +
+                ", curso=" + curso +
+                '}';
+    }
+
     Date dataDoDia = new Date();
 
     public Aluno getAluno() {

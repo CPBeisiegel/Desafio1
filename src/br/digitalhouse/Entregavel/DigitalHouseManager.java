@@ -20,16 +20,17 @@ public class DigitalHouseManager {
 
     public void excluirCurso(Integer codigoCurso){
         listacursos.remove(codigoCurso);
+        System.out.println("Curso excluido com sucesso Jessica :D " + codigoCurso + " Full Stack");
     }
 
-    public void registrarProfessorAdjunto(String nome, String sobrenome, Integer codigoProfessor, Integer quantidadeDeHoras){
-        ProfessorAdjunto novoProfessorAdjunto = new ProfessorAdjunto(nome,sobrenome,codigoProfessor,quantidadeDeHoras);
+    public void registrarProfessorAdjunto(String nome, String sobrenome, Integer codigoProfessorAdjunto, Integer quantidadeDeHoras){
+        ProfessorAdjunto novoProfessorAdjunto = new ProfessorAdjunto(nome,sobrenome,codigoProfessorAdjunto,quantidadeDeHoras);
         listaprofessores.add(novoProfessorAdjunto);
         System.out.println(novoProfessorAdjunto.toString());
     }
 
-    public void registrarProfessorTitular(String nome, String sobrenome, Integer codigoProfessor, String especialidade){
-        ProfessorTitular novoProfessorTitular = new ProfessorTitular(nome, sobrenome, codigoProfessor, especialidade);
+    public void registrarProfessorTitular(String nome, String sobrenome, Integer codigoProfessorTitular, String especialidade){
+        ProfessorTitular novoProfessorTitular = new ProfessorTitular(nome, sobrenome, codigoProfessorTitular, especialidade);
         listaprofessores.add(novoProfessorTitular);
         System.out.println(novoProfessorTitular.toString());
     }
@@ -42,6 +43,7 @@ public class DigitalHouseManager {
     public void matricularAluno(String nome, String sobrenome,Integer codigoAluno){
         Aluno matriculandoAluno = new Aluno(nome,sobrenome,codigoAluno);
         listadealunos.add(matriculandoAluno);
+        System.out.println("Aluno matriculado " + nome);
     }
 
     public void matricularAluno(Integer codigoAluno, Integer codigoCurso){
@@ -73,9 +75,9 @@ public class DigitalHouseManager {
     }
 
     public void alocarProfessores(Integer codigoCurso, Integer codigoProfessorTitular, Integer codigoProfessorAdjunto){
-        ProfessorTitular profTitular = new ProfessorTitular();
-        ProfessorAdjunto profAdjunto = new ProfessorAdjunto();
-        Curso profCurso = new Curso();
+        ProfessorTitular profTitular = new ProfessorTitular(codigoProfessorTitular);
+        ProfessorAdjunto profAdjunto = new ProfessorAdjunto(codigoProfessorAdjunto);
+        Curso profCurso = new Curso(profTitular, profAdjunto);
 
 
         for (Professor professor : listaprofessores) {
@@ -98,10 +100,11 @@ public class DigitalHouseManager {
         if(profCurso != null){
             profCurso.setProfessorAdjunto(profAdjunto);
             profCurso.setProfessorTitular(profTitular);
-            System.out.println("Deu certo");
+            System.out.println("Professor alocado com sucesso");
         } else{
-            System.out.println("Deu ruim");
+            System.out.println("Não foi possivel alocar o professor");
         }
+        System.out.println(profCurso);
 
     }
 
