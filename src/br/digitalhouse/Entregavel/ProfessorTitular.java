@@ -8,11 +8,28 @@ public class ProfessorTitular extends Professor {
     private String especialidade;
 
 
+    public ProfessorTitular(Integer codigoProfessor) {
+        this.codigoProfessor = codigoProfessor;
+    }
+
     public ProfessorTitular(String nome, String sobrenome, Integer codigoProfessor, String especialidade) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.codigoProfessor = codigoProfessor;
         this.especialidade = especialidade;
+    }
+
+    public ProfessorTitular() {
+    }
+
+    @Override
+    public String toString() {
+        return "ProfessorTitular{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", codigoProfessor=" + codigoProfessor +
+                ", especialidade='" + especialidade + '\'' +
+                '}';
     }
 
     @Override

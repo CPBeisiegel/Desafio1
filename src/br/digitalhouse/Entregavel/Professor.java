@@ -7,6 +7,16 @@ public abstract class Professor {
     private Integer tempo;
     private Integer codigoProfessor;
 
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", tempo=" + tempo +
+                ", codigoProfessor=" + codigoProfessor +
+                '}';
+    }
+
     public String getNome() {
         return nome;
     }

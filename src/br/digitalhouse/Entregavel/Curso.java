@@ -10,13 +10,33 @@ public class Curso {
     private ProfessorTitular professorTitular;
     private ProfessorAdjunto professorAdjunto;
     private Integer quantidadeMaximaAlunos;
-    private List<Aluno> listaAlunos = new ArrayList<>();
+     List<Aluno> listaAlunos = new ArrayList<>();
 
-    public Curso(String nome, Integer codigoCurso,Integer quantidadeMaximaAlunos) {
+    public Curso() {
+    }
+
+    public Curso(ProfessorTitular professorTitular, ProfessorAdjunto professorAdjunto) {
+        this.professorTitular = professorTitular;
+        this.professorAdjunto = professorAdjunto;
+    }
+
+    public Curso(String nome, Integer codigoCurso, Integer quantidadeMaximaAlunos) {
         this.nome = nome;
         this.codigoCurso = codigoCurso;
         this.quantidadeMaximaAlunos = quantidadeMaximaAlunos;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "nome='" + nome + '\'' +
+                ", codigoCurso=" + codigoCurso +
+                ", professorTitular=" + professorTitular +
+                ", professorAdjunto=" + professorAdjunto +
+                ", quantidadeMaximaAlunos=" + quantidadeMaximaAlunos +
+                ", listaAlunos=" + listaAlunos +
+                '}';
     }
 
     public String getNome() {
@@ -39,9 +59,6 @@ public class Curso {
         return professorTitular;
     }
 
-    public List<Aluno> getListaAlunos() {
-        return listaAlunos;
-    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -55,9 +72,6 @@ public class Curso {
         this.professorAdjunto = professorAdjunto;
     }
 
-    public void setListaAlunos(List<Aluno> listaAlunos) {
-        this.listaAlunos = listaAlunos;
-    }
 
     public void setProfessorTitular(ProfessorTitular professorTitular) {
         this.professorTitular = professorTitular;

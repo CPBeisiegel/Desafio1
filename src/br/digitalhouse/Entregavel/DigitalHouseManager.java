@@ -1,51 +1,21 @@
 package br.digitalhouse.Entregavel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DigitalHouseManager {
 
-    private List<Aluno> listadealunos;
-    private List<Professor> listaprofessores;
-    private List<Curso> listacursos;
-    private List<Matricula> listamatriculas;
+    List<Aluno> listadealunos = new ArrayList<>();
+    List<Professor> listaprofessores = new ArrayList<>();
+    List<Curso> listacursos = new ArrayList<>();
+    List<Matricula> listamatriculas = new ArrayList<>();
 
-
-    public List<Aluno> getListadealunos() {
-        return listadealunos;
-    }
-
-    public void setListadealunos(List<Aluno> listadealunos) {
-        this.listadealunos = listadealunos;
-    }
-
-    public List<Professor> getListaprofessores() {
-        return listaprofessores;
-    }
-
-    public void setListaprofessores(List<Professor> listaprofessores) {
-        this.listaprofessores = listaprofessores;
-    }
-
-    public List<Curso> getListacursos() {
-        return listacursos;
-    }
-
-    public void setListacursos(List<Curso> listacursos) {
-        this.listacursos = listacursos;
-    }
-
-    public List<Matricula> getListamatriculas() {
-        return listamatriculas;
-    }
-
-    public void setListamatriculas(List<Matricula> listamatriculas) {
-        this.listamatriculas = listamatriculas;
-    }
 
 
     public void registrarCurso(String nome, Integer codigoCurso, Integer quantidadeMaximaDeAlunos){
         Curso novoCurso = new Curso(nome,codigoCurso,quantidadeMaximaDeAlunos);
         listacursos.add(novoCurso);
+        System.out.println(novoCurso.toString());
     }
 
     public void excluirCurso(Integer codigoCurso){
@@ -55,11 +25,13 @@ public class DigitalHouseManager {
     public void registrarProfessorAdjunto(String nome, String sobrenome, Integer codigoProfessor, Integer quantidadeDeHoras){
         ProfessorAdjunto novoProfessorAdjunto = new ProfessorAdjunto(nome,sobrenome,codigoProfessor,quantidadeDeHoras);
         listaprofessores.add(novoProfessorAdjunto);
+        System.out.println(novoProfessorAdjunto.toString());
     }
 
     public void registrarProfessorTitular(String nome, String sobrenome, Integer codigoProfessor, String especialidade){
         ProfessorTitular novoProfessorTitular = new ProfessorTitular(nome, sobrenome, codigoProfessor, especialidade);
         listaprofessores.add(novoProfessorTitular);
+        System.out.println(novoProfessorTitular.toString());
     }
 
     public void excluirProfessor(Integer codigoProfessor){
@@ -73,12 +45,64 @@ public class DigitalHouseManager {
     }
 
     public void matricularAluno(Integer codigoAluno, Integer codigoCurso){
+        Curso curso = null;
+        Aluno aluno = null;
+        Matricula matricula;
 
+        for (Curso matriculaCurso: listacursos) {
+            if (matriculaCurso.getCodigoCurso().equals(codigoCurso)) {
+                curso = matriculaCurso;
+            }
+        }
+        for (Aluno matriculaNoAluno: listadealunos) {
+            if(matriculaNoAluno.getCodigoAluno().equals(codigoAluno)){
+                aluno = matriculaNoAluno;
+            }
+        }
+        if(curso != null && aluno != null){
+            if(curso.adicionarUmAluno(aluno)){
+              matricula = new Matricula(aluno,curso);
+              listamatriculas.add(matricula);
+                System.out.println("Aluno matriculado com sucesso");
+            } else if (aluno == null){
+                System.out.println("Aluno não encontrado");
+            } else if(curso == null){
+                System.out.println("Curso não encontrado");
+            }
+        }
     }
 
     public void alocarProfessores(Integer codigoCurso, Integer codigoProfessorTitular, Integer codigoProfessorAdjunto){
+        ProfessorTitular profTitular = new ProfessorTitular();
+        ProfessorAdjunto profAdjunto = new ProfessorAdjunto();
+        Curso profCurso = new Curso();
+
+
+        for (Professor professor : listaprofessores) {
+            if(professor.getCodigoProfessor().equals(codigoProfessorTitular)){
+                profTitular = (ProfessorTitular) professor;
+            }
+        }
+
+        for (Professor professor : listaprofessores) {
+            if(professor.getCodigoProfessor().equals(codigoProfessorAdjunto)){
+                profAdjunto = (ProfessorAdjunto) professor;
+            }
+        }
+
+        for (Curso curso : listacursos) {
+             if(curso.getCodigoCurso().equals(codigoCurso)){
+                 profCurso = (Curso) curso;
+             }
+        }
+        if(profCurso != null){
+            profCurso.setProfessorAdjunto(profAdjunto);
+            profCurso.setProfessorTitular(profTitular);
+            System.out.println("Deu certo");
+        } else{
+            System.out.println("Deu ruim");
+        }
 
     }
-
 
 }
